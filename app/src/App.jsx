@@ -13,7 +13,21 @@ class App extends React.Component {
     };
   }
 
+  fetchItemsWithNativeFetch = () => {
+    fetch('http://localhost:3333/items')
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        this.setState({ items: data });
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+  }
+
   componentDidMount() {
+    this.fetchItemsWithNativeFetch();
    // get data here!
   }
 
