@@ -4,6 +4,8 @@ import Home from './components/Home';
 import ItemsList from './components/ItemsList';
 import Item from './components/Item';
 
+import axios from 'axios';
+
 
 class App extends React.Component {
   constructor() {
@@ -26,9 +28,19 @@ class App extends React.Component {
       })
   }
 
+  fetchItemsWithAxios = () => {
+    axios.get('http://localhost:3333/items')
+      .then(response => {
+        this.setState({ items: response.data });
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+  }
+
   componentDidMount() {
-    this.fetchItemsWithNativeFetch();
-   // get data here!
+    this.fetchItemsWithAxios();
+    // this.fetchItemsWithNativeFetch();
   }
 
   render() {
