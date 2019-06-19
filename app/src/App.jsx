@@ -5,6 +5,7 @@ import ItemsList from './components/ItemsList';
 import Item from './components/Item';
 
 import axios from 'axios';
+import $ from 'jquery';
 
 
 class App extends React.Component {
@@ -38,9 +39,22 @@ class App extends React.Component {
       })
   }
 
+  fetchItemsWithJquery = () => {
+    $.ajax({
+      url: 'http://localhost:3333/items',
+      success: response => {
+        this.setState({ items: response });
+      },
+      error: error => {
+        console.log(error.statusText);
+      }
+    });
+  }
+
   componentDidMount() {
     this.fetchItemsWithAxios();
     // this.fetchItemsWithNativeFetch();
+    // this.fetchItemsWithJquery();
   }
 
   render() {
